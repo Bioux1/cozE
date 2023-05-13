@@ -1,0 +1,4 @@
+discord.py==2.1.0
+praw==7.7.0
+pytz==2023.3
+supabase==0.7.1
