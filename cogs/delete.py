@@ -8,7 +8,7 @@ class Delete(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.group(aliases = ["del"], invoke_without_command=True)
+    @commands.group(aliases = ["del"], invoke_without_command = True)
     @commands.is_owner()
     async def delete(self, ctx, channel_id: int = None):
         if channel_id:
