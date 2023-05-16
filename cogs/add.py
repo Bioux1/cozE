@@ -16,11 +16,15 @@ class Add(commands.Cog):
                 await ctx.send(f"{ctx.author.mention}, channel is already in the database.")
             else:
                 if channel_id and role_id:
-                    data = db.add(channel_id, role_id)
-                    if data == []:
-                        await ctx.send(f"{ctx.author.mention}, something went wrong.")
+                    channel = self.client.get_channel(channel_id)
+                    if channel:
+                        data = db.add(channel_id, role_id)
+                        if data == []:
+                            await ctx.send(f"{ctx.author.mention}, something went wrong.")
+                        else:
+                            await ctx.send(f"{ctx.author.mention}, successfully add new channel and role.")
                     else:
-                        await ctx.send(f"{ctx.author.mention}, successfully add new channel and role.")
+                        await ctx.send(f"{ctx.author.mention}, could not find channel (ID: {channel_id}).")
                 else:
                     data = db.add(channel_id)
                     if data[0]["channel_id"] == channel_id:
