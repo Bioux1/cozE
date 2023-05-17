@@ -26,11 +26,15 @@ class Add(commands.Cog):
                     else:
                         await ctx.send(f"{ctx.author.mention}, could not find channel (ID: {channel_id}).")
                 else:
-                    data = db.add(channel_id)
-                    if data[0]["channel_id"] == channel_id:
-                        await ctx.send(f"{ctx.author.mention}, successfully add new channel.")
+                    channel = self.client.get_channel(channel_id)
+                    if channel:
+                        data = db.add(channel_id)
+                        if data[0]["channel_id"] == channel_id:
+                            await ctx.send(f"{ctx.author.mention}, successfully add new channel.")
+                        else:
+                            await ctx.send(f"{ctx.author.mention}, something went wrong.")
                     else:
-                        await ctx.send(f"{ctx.author.mention}, something went wrong.")
+                        await ctx.send(f"{ctx.author.mention}, could not find channel (ID: {channel_id}).")
         else:
             await ctx.send(f"{ctx.author.mention}, you need to specify a channel ID.")
 
