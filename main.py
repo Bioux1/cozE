@@ -17,7 +17,8 @@ extensions = (
     "cogs.about",
     "cogs.source",
     "cogs.info",
-    "cogs.reddit"
+    "cogs.reddit",
+    "cogs.download"
 )
 
 @client.event
