@@ -12,10 +12,10 @@ config = init()
 class Download(commands.Cog):
     def __init__(self, client):
         self.client = client
-        self.reddit = praw.Reddit(client_id=config["REDDIT_CLIENT"], client_secret=config["REDDIT_SECRET"], user_agent=config["REDDIT_USER"], check_for_async=False)
+        self.reddit = praw.Reddit(client_id = config["REDDIT_CLIENT"], client_secret = config["REDDIT_SECRET"], user_agent = config["REDDIT_USER"])
         self.downloader = Downloader(max_q = True)
 
-    @commands.command(aliases=["dl", "save", "fetch"])
+    @commands.command(aliases = ["dl", "save", "fetch"])
     async def download(self, ctx, post = None):
         if post:
             try:

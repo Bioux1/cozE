@@ -16,18 +16,18 @@ class Reddit(commands.Cog):
     def __init__(self, client):
         self.client = client
         self.subreddit_name = "GameDeals"
-        self.reddit = praw.Reddit(client_id=config["REDDIT_CLIENT"], client_secret=config["REDDIT_SECRET"], user_agent=config["REDDIT_USER"], check_for_async=False)
+        self.reddit = praw.Reddit(client_id = config["REDDIT_CLIENT"], client_secret = config["REDDIT_SECRET"], user_agent = config["REDDIT_USER"])
         self.check_posts.start()
 
     def create_embed(self, post):
-        created_time = datetime.fromtimestamp(post.created_utc, tz=pytz.utc)
+        created_time = datetime.fromtimestamp(post.created_utc, tz = pytz.utc)
         formatted_time = created_time.astimezone(pytz.timezone('Europe/Stockholm')).strftime("%B %d, %Y at %I:%M%p")
-        embed = discord.Embed(title=post.title, description=post.url)
+        embed = discord.Embed(title = post.title, description = post.url)
         embed.colour = 16733952
         embed.set_footer(text=f"via /r/GameDeals | {formatted_time}")
         return embed
 
-    @tasks.loop(minutes=15)
+    @tasks.loop(minutes = 15)
     async def check_posts(self):
         channels = db.select()
         subreddit = self.reddit.subreddit(self.subreddit_name)
