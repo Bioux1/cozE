@@ -1,6 +1,7 @@
 {
     "TOKEN": "",
     "INVITE_LINK": "",
+    "REQUEST_CHANNEL_ID": 0,
     "SUPABASE_URL": "",
     "SUPABASE_KEY": "",
     "REDDIT_CLIENT": "",

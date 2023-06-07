@@ -41,6 +41,6 @@ async def main():
 
 config = init()
 client.start_time = time.time()
-client.request_channel = client.get_channel(1013472611168161862)
+client.request_channel = client.get_channel(config["REQUEST_CHANNEL_ID"])
 
 asyncio.run(main())
