@@ -1,6 +1,6 @@
-import praw
 import discord
 import pytz
+import asyncpraw
 
 from datetime import datetime
 from discord.ext import commands
@@ -16,7 +16,7 @@ class Reddit(commands.Cog):
     def __init__(self, client):
         self.client = client
         self.subreddit_name = "GameDeals"
-        self.reddit = praw.Reddit(client_id = config["REDDIT_CLIENT"], client_secret = config["REDDIT_SECRET"], user_agent = config["REDDIT_USER"])
+        self.reddit = asyncpraw.Reddit(client_id = config["REDDIT_CLIENT"], client_secret = config["REDDIT_SECRET"], user_agent = config["REDDIT_USER"])
         self.check_posts.start()
 
     def create_embed(self, post):
@@ -30,12 +30,12 @@ class Reddit(commands.Cog):
     @tasks.loop(minutes = 15)
     async def check_posts(self):
         channels = db.select()
-        subreddit = self.reddit.subreddit(self.subreddit_name)
+        subreddit = await self.reddit.subreddit(self.subreddit_name)
         new_posts_ids = []
         previous_post_ids = []
         for id in db.select_post_ids():
             previous_post_ids.append(id["id"])
-        for post in subreddit.new():
+        async for post in subreddit.new():
             new_posts_ids.append(post.id)
             if post.id in previous_post_ids:
                 continue
