@@ -40,7 +40,7 @@ class Reddit(commands.Cog):
             if post.id in previous_post_ids:
                 continue
             db.insert_post_id(post.id)
-            if "free" in post.title.lower() and ("100% off" in post.title.lower() or "-100%" in post.title.lower()):
+            if "free" in post.title.lower() and "100%" in post.title.lower():
                 embed = self.create_embed(post)
                 for d in channels:
                     channel = self.client.get_channel(d["channel_id"])
