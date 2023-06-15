@@ -1,4 +1,4 @@
-discord.py==2.2.3
+discord.py==2.3.0
 pytz==2023.3
 supabase==1.0.3
 redvid==1.2.0
