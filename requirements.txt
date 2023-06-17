@@ -3,3 +3,4 @@ pytz==2023.3
 supabase==1.0.3
 redvid==1.2.0
 asyncpraw==7.7.0
+requests==2.28.1
