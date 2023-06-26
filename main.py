@@ -10,6 +10,7 @@ activity = discord.Game(name = "$about")
 client = commands.Bot(command_prefix = ("$"), activity = activity, intents = discord.Intents(message_content = True, messages = True, guilds = True, members = True))
 
 extensions = (
+    "cogs.events",
     "cogs.invite",
     "cogs.ping",
     "cogs.add",
@@ -20,15 +21,6 @@ extensions = (
     "cogs.reddit",
     "cogs.download"
 )
-
-@client.event
-async def on_ready():
-    print(f"Logged as {client.user} (ID: {client.user.id})")
-
-@client.event
-async def on_command_error(ctx, error):
-    if isinstance(error, commands.errors.CommandNotFound):
-        pass
 
 async def main():
     async with client:
