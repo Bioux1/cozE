@@ -9,7 +9,7 @@ class Events(commands.Cog):
         print(f"Logged as {self.client.user} (ID: {self.client.user.id})")
 
     @commands.Cog.listener()
-    async def on_command_error(self, error):
+    async def on_command_error(self, ctx, error):
         if isinstance(error, commands.errors.CommandNotFound):
             pass
 
