@@ -45,6 +45,10 @@ class Supabase:
     def select(self):
         data = supabase.table("settings").select("*").execute()
         return data.data
+    
+    def select_guild(self, guild_id):
+        data = supabase.table("settings").select("channel_id", "role_id").eq("guild_id", guild_id).execute()
+        return data.data
 
     def select_post_ids(self):
         data = supabase.table("ids").select("*").execute()
