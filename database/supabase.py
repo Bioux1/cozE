@@ -10,23 +10,23 @@ supabase: Client = create_client(url, key)
 
 class Supabase:
     def check_guild(self, guild_id):
-        response = supabase.table("settings_duplicate").select("*").eq("guild_id", guild_id).execute()
+        response = supabase.table("settings").select("*").eq("guild_id", guild_id).execute()
         if response.data == []:
             return False
         return True
 
     def add(self, guild_id, channel_id, role_id = None):
         if role_id:
-            data = supabase.table("settings_duplicate").insert({"guild_id": guild_id, "channel_id": channel_id, "role_id": role_id}).execute()
+            data = supabase.table("settings").insert({"guild_id": guild_id, "channel_id": channel_id, "role_id": role_id}).execute()
         else:
-            data = supabase.table("settings_duplicate").insert({"guild_id": guild_id, "channel_id": channel_id}).execute()
+            data = supabase.table("settings").insert({"guild_id": guild_id, "channel_id": channel_id}).execute()
         return data.data
     
     def update(self, guild_id, channel_id, role_id = None):
         if role_id:
-            data = supabase.table("settings_duplicate").update({"channel_id": channel_id, "role_id": role_id}).eq("guild_id", guild_id).execute()
+            data = supabase.table("settings").update({"channel_id": channel_id, "role_id": role_id}).eq("guild_id", guild_id).execute()
         else:
-            data = supabase.table("settings_duplicate").update({"channel_id": channel_id}).eq("guild_id", guild_id).execute()
+            data = supabase.table("settings").update({"channel_id": channel_id}).eq("guild_id", guild_id).execute()
         return data.data
 
     def insert_post_id(self, id):
@@ -39,7 +39,7 @@ class Supabase:
                 supabase.table("ids").delete().eq("id", id["id"]).execute()
 
     def delete(self, guild_id):
-        data = supabase.table("settings_duplicate").delete().eq("guild_id", guild_id).execute()
+        data = supabase.table("settings").delete().eq("guild_id", guild_id).execute()
         return data.data
 
     def select(self):
