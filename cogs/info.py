@@ -9,23 +9,19 @@ class Info(commands.Cog):
         self.client = client
 
     @commands.command()
-    async def info(self, ctx, channel_id: int = None):
-        if channel_id:
-            if db.check(channel_id):
-                data = db.select_role(channel_id)
-                if data[0]["role_id"] != None:
-                    await ctx.send(f"{ctx.author.mention}, channel (ID: {channel_id}) is registered with role (ID: {data[0]['role_id']}).")
-                else:
-                    await ctx.send(f"{ctx.author.mention}, channel (ID: {channel_id}) is registered without a role.")
-            else:
-                await ctx.send(f"{ctx.author.mention}, channel (ID: {channel_id}) is not registered.")
+    async def info(self, ctx):
+        if not db.check_guild(ctx.guild.id):
+            await ctx.send(f"{ctx.author.mention}, There is no existing configuration for this server. Run `$setup` to set up a configuration.")
         else:
-            await ctx.send(f"{ctx.author.mention}, you need to specify a channel ID.")
-        
-    @info.error
-    async def role_error(self, ctx, error):
-        if isinstance(error, commands.errors.BadArgument):
-            await ctx.send(f"{ctx.author.mention}, argument needs to be of type int.")
+            data = db.select_guild(ctx.guild.id)
+            message = f"{ctx.author.mention}, current configuration for server (ID: {ctx.guild.id}): \nChannel: <#{data[0]['channel_id']}> \n"
+            user = self.client.get_user(data[0]["role_id"])
+            if user:
+                message += f"User: <@{data[0]['role_id']}>"
+                await ctx.send(message)
+            else:
+                message += f"Role: <@&{data[0]['role_id']}>"
+                await ctx.send(message)
 
 async def setup(client: commands.Bot):
     await client.add_cog(Info(client))

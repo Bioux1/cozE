@@ -13,13 +13,12 @@ extensions = (
     "cogs.events",
     "cogs.invite",
     "cogs.ping",
-    "cogs.add",
-    "cogs.delete",
     "cogs.about",
     "cogs.source",
     "cogs.info",
     "cogs.reddit",
-    "cogs.download"
+    "cogs.download",
+    "cogs.setup"
 )
 
 async def main():
@@ -33,6 +32,5 @@ async def main():
 
 config = init()
 client.start_time = time.time()
-client.request_channel = client.get_channel(config["REQUEST_CHANNEL_ID"])
 
 asyncio.run(main())
