@@ -13,8 +13,6 @@ extensions = (
     "cogs.events",
     "cogs.invite",
     "cogs.ping",
-    "cogs.add",
-    "cogs.delete",
     "cogs.about",
     "cogs.source",
     "cogs.info",
