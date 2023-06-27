@@ -19,7 +19,8 @@ extensions = (
     "cogs.source",
     "cogs.info",
     "cogs.reddit",
-    "cogs.download"
+    "cogs.download",
+    "cogs.setup"
 )
 
 async def main():
