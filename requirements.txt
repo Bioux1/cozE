@@ -1,6 +1,6 @@
 discord.py==2.3.2
 pytz==2023.3
 supabase==1.0.4
-redvid==2.0.0
+redvid==2.0.1
 asyncpraw==7.7.1
 requests==2.31.0
